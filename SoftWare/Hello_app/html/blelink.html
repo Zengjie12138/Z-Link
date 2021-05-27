@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <style>
+        html,
+        body {
+            background-color: rgba(0, 0, 0, 0.5)
+        }
+
+        .bgc1 {
+            /* background-color: rgba(146, 209, 28, 0.5) */
+            position: absolute;
+            width: 300px;
+            top: 10%;
+        }
+
+        .labe1 {
+            position: absolute;
+            height: 45px;
+            top: 11px;
+            left: 9%;
+            font-size: 18px;
+            color: white
+        }
+
+        .input1 {
+            position: absolute;
+            left: 35%;
+            width: 155px;
+            height: 45px;
+            font-size: 18px;
+            background-color: #e9e5d3;
+            border: 12 #e9e5d3 solid;
+            border-radius: 6px;
+            outline: none;
+        }
+
+        .btn1 {
+            position: absolute;
+            left: 33%;
+            color: white;
+            background-color: #000000;
+            border: 6px #000000 solid;
+            border-radius: 5px;
+            outline: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class='bgc1'>
+        <label class='labe1'>蓝牙mac:</label>
+        <input type="text" id='data' value='98:D3:C1:FD:B6:D8' class='input1'>
+        <br><br><br><br>
+        <div class='btn1' onclick="bleconnect()">连接Z-Link</div>
+    </div>
+
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+
+    var info;
+
+    apiready = function () {
+        api.addEventListener({              //手动关闭页面
+            name: 'swipeup'
+        }, function (ret, err) {
+            api.closeFrame();
+        });
+
+
+        api.ajax({
+            url: 'https://devapi.qweather.com/v7/weather/now?key=e03fdf09e0374281934ded30d0071b44&location=104.10,30.66&lang=en',
+            method: 'get',
+            timeout: 30,
+            dataType: 'json',
+            returnAll: true,
+        }, function (ret, err) {
+            // console.log(ret);
+            let web_ret = ret['body']['now'];
+            let date = web_ret['obsTime'].substr(0, 10);
+            let temperature = web_ret['temp'];
+            let bodyfeel = web_ret['feelsLike'];
+            let weather = web_ret['text'];
+            let humidity = web_ret['humidity'];
+            let visual = web_ret['vis'];
+
+            info = 'Date:' + date + '*' + 'Temperature:' + temperature + 'C' + '*' + 'bodyfeel:' + bodyfeel + 'C' + '*' + 'weather:' + weather + '*' + 'humidity:' +
+                humidity + '%' + '*' + 'visual:' + visual + 'Km';
+            api.toast({
+                msg: info
+            });
+
+        });
+
+    };
+
+
+    function bleconnect() {
+        let data = $api.dom('#data');
+        var bluetoothSerial = api.require("cxgBluetoothSerial");
+
+        api.toast({
+            msg: '正在连接，请稍等...',
+            duration: 1000,
+        })
+
+        bluetoothSerial.connect(                //连接蓝牙
+            {
+                address: data.value
+            },
+            function (ret, err) {
+                if (!err) {
+                    api.toast({
+                        msg: '连接成功'
+                    });
+                    $api.setStorage('blestate', 'on');
+
+
+                } else {
+                    api.toast({
+                        msg: '连接失败'
+                    })
+                    $api.setStorage('blestate', 'off');
+                }
+
+                /*此处发送数据*/
+                var bluetoothSerial = api.require("cxgBluetoothSerial");
+                bluetoothSerial.sendData(
+                    {
+                        data: info
+                    },
+                    function (ret, err) {
+                        if (!err) {
+                            api.toast({
+                                msg: '同步成功'
+                            })
+                        } else {
+                            api.toast({
+                                msg: '同步失败'
+                            })
+                        }
+                    }
+                );
+
+                api.closeFrame();
+            }
+        );
+
+
+    }
+
+
+</script>
+
+</html>

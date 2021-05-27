@@ -1,0 +1,10 @@
+link_card\lv_mem.o: ..\GUI\lvgl\src\lv_misc\lv_mem.c
+link_card\lv_mem.o: ..\GUI\lvgl\src\lv_misc\lv_mem.h
+link_card\lv_mem.o: ..\GUI\lvgl\src\lv_misc\../../../lv_conf.h
+link_card\lv_mem.o: D:\Keil5_APP\APP\ARM\ARMCC\Bin\..\include\stdint.h
+link_card\lv_mem.o: ..\GUI\lvgl\src\lv_misc\../../../lvgl/src/lv_conf_checker.h
+link_card\lv_mem.o: D:\Keil5_APP\APP\ARM\ARMCC\Bin\..\include\stddef.h
+link_card\lv_mem.o: ..\GUI\lvgl\src\lv_misc\lv_log.h
+link_card\lv_mem.o: ..\GUI\lvgl\src\lv_misc\../../../lv_conf.h
+link_card\lv_mem.o: ..\GUI\lvgl\src\lv_misc\lv_math.h
+link_card\lv_mem.o: D:\Keil5_APP\APP\ARM\ARMCC\Bin\..\include\string.h

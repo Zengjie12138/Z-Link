@@ -1,0 +1,26 @@
+--cpu Cortex-M3
+"sdtest\startup_stm32f103xe.o"
+"sdtest\main.o"
+"sdtest\stm32f1xx_it.o"
+"sdtest\stm32f1xx_hal_msp.o"
+"sdtest\stm32f1xx_hal_gpio_ex.o"
+"sdtest\stm32f1xx_ll_sdmmc.o"
+"sdtest\stm32f1xx_hal.o"
+"sdtest\stm32f1xx_hal_rcc.o"
+"sdtest\stm32f1xx_hal_rcc_ex.o"
+"sdtest\stm32f1xx_hal_gpio.o"
+"sdtest\stm32f1xx_hal_dma.o"
+"sdtest\stm32f1xx_hal_cortex.o"
+"sdtest\stm32f1xx_hal_pwr.o"
+"sdtest\stm32f1xx_hal_flash.o"
+"sdtest\stm32f1xx_hal_flash_ex.o"
+"sdtest\stm32f1xx_hal_exti.o"
+"sdtest\stm32f1xx_hal_sd.o"
+"sdtest\stm32f1xx_hal_tim.o"
+"sdtest\stm32f1xx_hal_tim_ex.o"
+"sdtest\stm32f1xx_hal_uart.o"
+"sdtest\system_stm32f1xx.o"
+--library_type=microlib --strict --scatter "SDtest\SDtest.sct"
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "SDtest.map" -o SDtest\SDtest.axf

@@ -1,0 +1,12 @@
+st7789v\lv_font.o: ..\GUI\lvgl\src\lv_font\lv_font.c
+st7789v\lv_font.o: ..\GUI\lvgl\src\lv_font\lv_font.h
+st7789v\lv_font.o: ..\GUI\lvgl\src\lv_font\../../../lv_conf.h
+st7789v\lv_font.o: D:\Keil5_APP\APP\ARM\ARMCC\Bin\..\include\stdint.h
+st7789v\lv_font.o: ..\GUI\lvgl\src\lv_font\../../../lvgl/src/lv_conf_checker.h
+st7789v\lv_font.o: D:\Keil5_APP\APP\ARM\ARMCC\Bin\..\include\stddef.h
+st7789v\lv_font.o: D:\Keil5_APP\APP\ARM\ARMCC\Bin\..\include\stdbool.h
+st7789v\lv_font.o: ..\GUI\lvgl\src\lv_font\lv_symbol_def.h
+st7789v\lv_font.o: ..\GUI\lvgl\src\lv_font\../../../lv_conf.h
+st7789v\lv_font.o: ..\GUI\lvgl\src\lv_font\../lv_misc/lv_utils.h
+st7789v\lv_font.o: ..\GUI\lvgl\src\lv_font\../lv_misc/lv_log.h
+st7789v\lv_font.o: ..\GUI\lvgl\src\lv_font\../lv_misc/../../../lv_conf.h

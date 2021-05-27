@@ -1,0 +1,181 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>Hello APP</title>
+    <link rel="stylesheet" type="text/css" href="./css/api.css" />
+    <style>
+        html,
+        body {
+            background-image: url("./res/pika.png");
+            background-size: 540px 960px;
+            background-repeat: no-repeat;
+        }
+
+        .btn1 {
+            width: 170px;
+            height: 40px;
+
+            position: absolute;
+            right: 50%;
+            top: 30%;
+            transform: translate(50%, -50%);
+            /*自己的50% */
+            background-color: #f11d0e;
+            border: 15px #f11d0e solid;
+            border-radius: 10px;
+            box-shadow: 5px 2px 10px #909090;
+            outline: none;
+
+            text-align: center;
+            line-height: 40px;
+        }
+
+        .btn2 {
+            width: 170px;
+            height: 40px;
+
+            position: absolute;
+            right: 50%;
+            top: 50%;
+            transform: translate(50%, -50%);
+            /*自己的50% */
+            background-color: #f11d0e;
+            border: 15px #f11d0e solid;
+            border-radius: 10px;
+            box-shadow: 5px 2px 10px #909090;
+            outline: none;
+
+            text-align: center;
+            line-height: 40px;
+        }
+
+        .btn3 {
+            width: 170px;
+            height: 40px;
+
+            position: absolute;
+            right: 50%;
+            top: 70%;
+            transform: translate(50%, -50%);
+            /*自己的50% */
+            background-color: #f11d0e;
+            border: 15px #f11d0e solid;
+            border-radius: 10px;
+            box-shadow: 5px 2px 10px #909090;
+            outline: none;
+
+            text-align: center;
+            line-height: 40px;
+        }
+
+        .box {
+            position: absolute;
+            right: 50%;
+            top: 80%;
+            background-color: #f11d0e;
+            border: 15px #f11d0e solid;
+            border-radius: 10px;
+            box-shadow: 5px 2px 10px #909090;
+            outline: none;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="btn1" id="notebtn" tapmode onclick="openNoteWin()">便签</div>
+    <div class="btn2" id="barbtn" tapmode onclick="openweather()">今日天气</div>
+    <div class="btn3" id="elsebtn" tapmode onclick="openweb()">测试专用</div>
+
+
+</body>
+
+<script type="text/javascript" src="./script/api.js"></script>
+<script type="text/javascript">
+    apiready = function () {
+        api.removeLaunchView({                                    //移除启动页
+            animation: {
+                type: 'cube',
+                duration: 1500
+            }
+        });
+
+        api.addEventListener({                                  //监听下扫事件，打开connect窗口
+            name: 'swipedown'
+        }, function (ret, err) {
+            openLinkFrame();
+        });
+
+        api.addEventListener({
+            name: 'keyback'
+        }, function (ret, err) {
+            $api.setStorage('blestate', 'off');
+            api.closeWin();
+        });
+
+        let notebtn = $api.dom("#notebtn");
+        let linkbtn = $api.dom('#blelink');
+
+
+        notebtn.onclick = openNoteWin;                            //添加事件 
+        
+        
+
+    };
+
+    function openNoteWin() {                                      //打开便签界面
+        api.openWin({
+            name: 'note',
+            url: './html/note.html'
+        })
+    }
+    function openLinkFrame() {
+        api.openFrame({
+            name: 'blelink',
+            url: './html/blelink.html',
+            rect: {
+                x: 50,
+                y: 50,
+                w: 270,
+                h: 130
+            },
+            animation: {
+                type: "fade",
+                duration: 300
+            },
+        })
+    }
+
+    function openweather(){
+        api.openWin({
+            name: 'win_weather',
+            url: 'http://hfx.link/1tzm1',
+            rect: {
+                x: 0,
+                y: 0,
+            }
+        })
+    }
+
+    function openweb() {
+        api.openWin({
+            name: 'win_show2',
+            url: 'http://weathernew.pae.baidu.com/weathernew/pc?query=%E5%86%85%E6%B1%9F%E5%A4%A9%E6%B0%94&srcid=4982&city_name=%E6%88%90%E9%83%BD&province_name=%E5%9B%9B%E5%B7%9D',
+            rect: {
+                x: 0,
+                y: 0,
+            }
+        })
+
+    }
+
+
+</script>
+
+</html>

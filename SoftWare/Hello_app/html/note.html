@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <style>
+        html,
+        body {
+            background-image: url("../res/cat.png");
+            background-size: 540px 960px;
+        }
+
+        .divpos {
+            position: absolute;
+
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            /*自己的50% */
+            /* background-color: rgba(0,0,0,0.3); */
+            background-color: transparent;
+        }
+
+        .h_pos {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            /*自己的50% */
+            color: black;
+            font-size: 30px;
+        }
+
+        .text {
+            background-color: rgba(226, 132, 25, 0.4);
+            font-size: 20px;
+            border: 20px rgba(226, 132, 25, 0.4) solid;
+            border-radius: 8%;
+            outline: none;
+            box-shadow: 5px 2px 10px #909090;
+        }
+
+        .notebutton1 {
+            position: absolute;
+            right: 30%;
+            transform: translate(50%, -50%);
+            /*自己的50% */
+            background-color: #f11d0e;
+            border: 5px #f11d0e solid;
+            border-radius: 8px;
+            box-shadow: 5px 2px 10px #909090;
+            outline: none;
+        }
+
+        .notebutton2 {
+            position: absolute;
+            right: 60%;
+            transform: translate(50%, -50%);
+            /*自己的50% */
+            background-color: #f11d0e;
+            border: 5px #f11d0e solid;
+            border-radius: 8px;
+            box-shadow: 5px 2px 10px #909090;
+            outline: none;
+        }
+
+        .notebutton3 {
+            position: absolute;
+            right: 90%;
+            transform: translate(50%, -50%);
+            /*自己的50% */
+            background-color: #f11d0e;
+            border: 5px #f11d0e solid;
+            border-radius: 8px;
+            box-shadow: 5px 2px 10px #909090;
+            outline: none;
+        }
+
+        .blestate {
+            width: 25px;
+            height: 25px;
+
+            position: absolute;
+            right: 10%;
+            top: 95%;
+            transform: translate(50%, -50%);
+            /*自己的50% */
+            background-color: white;
+            border-radius: 25px;
+        }
+
+        .send {
+            position: absolute;
+            right: 50%;
+            top: 78%;
+            transform: translate(50%, -50%);
+
+            /* color: white; */
+            background-color: #f1610d;
+            border: 6px #f1610d solid;
+            border-radius: 5px;
+            box-shadow: 5px 2px 10px #909090;
+            outline: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="blestate" id='linkstate'></div>
+    <div class="divpos">
+        <h3 class="h_pos">my note</h3>
+        <br><br>
+        <textarea class="text" id="note" cols="20" rows="15"></textarea>
+    </div>
+    <div class='send' tapmode onclick="bleSend()">上传至Z-Link</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function () {
+
+        let note = $api.dom("#note");
+        let save_btn = $api.dom("#save");
+        let ble1 = $api.dom("#ble1");
+        let ble2 = $api.dom("#ble2");
+        let ble3 = $api.dom("#ble3");
+        let link_o = $api.dom('#linkstate')
+
+
+        let state = $api.getStorage("blestate");  //蓝牙状态获取
+        if (state == 'on') {
+            link_o.style.backgroundColor = 'blue';
+        } else {
+            link_o.style.backgroundColor = 'white';
+        }
+
+        myRead();                                   //读取存储的信息
+
+        api.addEventListener({                      //添加退出事件
+            name: 'keyback'
+        }, function (ret) {
+            let notemsg = note.value;
+            $api.setStorage('notemsg', notemsg);
+            api.closeWin();
+        })
+        
+    }
+
+    function myRead() {
+        let readMsg = $api.getStorage("notemsg");
+        note.value = readMsg;
+    }
+
+    function bleSend() {
+        let note = $api.dom("#note");
+        let notemsg = note.value;
+        notemsg = notemsg.replace(/\n/g,"*")
+        console.log(notemsg);
+        var bluetoothSerial = api.require("cxgBluetoothSerial");
+        bluetoothSerial.sendData(
+            {
+                data: notemsg
+            },
+            function (ret, err) {
+                if (!err) {
+                    api.toast({
+                        msg:'同步成功'
+                    })
+                } else {
+                    api.toast({
+                        msg:'同步失败'
+                    })
+                }
+            }
+        );
+    }
+
+</script>
+
+</html>

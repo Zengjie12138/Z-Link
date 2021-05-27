@@ -1,0 +1,27 @@
+--cpu Cortex-M3
+"st7789v\startup_stm32f103xe.o"
+"st7789v\main.o"
+"st7789v\stm32f1xx_it.o"
+"st7789v\stm32f1xx_hal_msp.o"
+"st7789v\stm32f1xx_hal_gpio_ex.o"
+"st7789v\stm32f1xx_hal_spi.o"
+"st7789v\stm32f1xx_hal.o"
+"st7789v\stm32f1xx_hal_rcc.o"
+"st7789v\stm32f1xx_hal_rcc_ex.o"
+"st7789v\stm32f1xx_hal_gpio.o"
+"st7789v\stm32f1xx_hal_dma.o"
+"st7789v\stm32f1xx_hal_cortex.o"
+"st7789v\stm32f1xx_hal_pwr.o"
+"st7789v\stm32f1xx_hal_flash.o"
+"st7789v\stm32f1xx_hal_flash_ex.o"
+"st7789v\stm32f1xx_hal_exti.o"
+"st7789v\stm32f1xx_hal_tim.o"
+"st7789v\stm32f1xx_hal_tim_ex.o"
+"st7789v\stm32f1xx_hal_uart.o"
+"st7789v\system_stm32f1xx.o"
+"st7789v\spi.o"
+"st7789v\tftlcd.o"
+--library_type=microlib --strict --scatter "ST7789V\ST7789V.sct"
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "ST7789V.map" -o ST7789V\ST7789V.axf

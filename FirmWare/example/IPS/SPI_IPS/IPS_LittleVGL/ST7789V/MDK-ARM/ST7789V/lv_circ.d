@@ -1,0 +1,9 @@
+st7789v\lv_circ.o: ..\GUI\lvgl\src\lv_misc\lv_circ.c
+st7789v\lv_circ.o: ..\GUI\lvgl\src\lv_misc\lv_circ.h
+st7789v\lv_circ.o: D:\Keil5_APP\APP\ARM\ARMCC\Bin\..\include\stddef.h
+st7789v\lv_circ.o: ..\GUI\lvgl\src\lv_misc\lv_area.h
+st7789v\lv_circ.o: D:\Keil5_APP\APP\ARM\ARMCC\Bin\..\include\string.h
+st7789v\lv_circ.o: D:\Keil5_APP\APP\ARM\ARMCC\Bin\..\include\stdbool.h
+st7789v\lv_circ.o: D:\Keil5_APP\APP\ARM\ARMCC\Bin\..\include\stdint.h
+st7789v\lv_circ.o: ..\GUI\lvgl\src\lv_misc\../../../lv_conf.h
+st7789v\lv_circ.o: ..\GUI\lvgl\src\lv_misc\../../../lvgl/src/lv_conf_checker.h
